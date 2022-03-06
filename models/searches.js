@@ -1,9 +1,25 @@
+const fs = require('fs');
 const axios = require('axios').default;
 
 class Searches {
 
+  history = [];
+  dbPath = './db/database.json';
+
   constructor() {
     //Read DB
+    this.readDB();
+  }
+
+  get historyCapitalize() {
+
+    return this.history.map( place => {
+      let words = place.split(' ');
+      words = words.map( w => w[0].toUpperCase() + w.substring(1));
+
+      return words.join(' ');
+    });
+    
   }
 
   get paramsMapbox() {
@@ -69,6 +85,40 @@ class Searches {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  addHistory(place = '') {
+
+    if (this.history.includes(place.toLowerCase())) {
+      return;
+    }
+
+    this.history = this.history.splice(0, 5);
+
+    this.history.unshift(place.toLowerCase());
+
+    this.addDB();
+  }
+
+  addDB() {
+
+    const payload = {
+      history: this.history
+    }
+
+    fs.writeFileSync(this.dbPath, JSON.stringify(payload));
+  }
+
+  readDB() {
+
+    if (!fs.existsSync(this.dbPath)) {
+      return;
+    }
+
+    const info = fs.readFileSync(this.dbPath, {encoding: 'utf-8'});
+    const data = JSON.parse(info);
+
+    this.history = data.history;
   }
   
 }

@@ -22,7 +22,11 @@ const main = async() => {
         
         //Select a place
         const idSelected = await listPlaces(places);
+        if (idSelected === '0') continue;
         const objSelectedPlace = places.find( p => p.id === idSelected );
+
+        //Add in DB
+        searches.addHistory(objSelectedPlace.name);
 
         //Weather data
         const weather = await searches.weatherCity(objSelectedPlace.lat, objSelectedPlace.lng);
@@ -39,6 +43,15 @@ const main = async() => {
         console.log('Min:', weather.min);
         console.log('Max:', weather.max);
         console.log('Desc:', weather.desc.green);
+
+      break;
+
+      case 2:
+
+        searches.historyCapitalize.forEach( (place, index) => {
+          const i = `${ index + 1}.`.green;
+          console.log(`${i} ${place}`);
+        });
 
       break;
     }
