@@ -9,15 +9,15 @@ const questions = [
     choices: [
       {
         value: 1,
-        name: `${'1.'.green.bold} Search city`
+        name: `${'1.'.blue.bold} 🔍 Search city`
       },
       {
         value: 2,
-        name: `${'2.'.green.bold} History`
+        name: `${'2.'.blue.bold} 📃 History`
       },
       {
         value: 0,
-        name: `${'0.'.green.bold} Exit`
+        name: `${'0.'.blue.bold} ❌ Exit`
       }
     ]
   }
@@ -26,9 +26,9 @@ const questions = [
 const inquirerMenu = async() => {
 
   console.clear();
-  console.log('======================'.rainbow);
-  console.log('   Select an option  '.bold);
-  console.log('======================'.rainbow);
+  console.log('======================'.blue);
+  console.log('  🌧  Weather App  🌧 '.bold);
+  console.log('======================'.blue);
 
   const { option } = await inquirer.prompt(questions);
 
