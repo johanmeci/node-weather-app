@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { getInput, inquirerMenu, pauseMenu } = require("./helpers/inquirer");
+const { getInput, inquirerMenu, pauseMenu, listPlaces } = require("./helpers/inquirer");
 const Searches = require("./models/searches");
 
 const main = async() => {
@@ -15,24 +15,30 @@ const main = async() => {
     switch (opt) {
       case 1:
         //Show message
-        const city = await getInput('City: ');
-        searches.searchCity(city);
-
+        const inputSearch = await getInput('City: ');
+        
         //Search the places
-
+        const places = await searches.searchCity(inputSearch);
+        
         //Select a place
+        const idSelected = await listPlaces(places);
+        const objSelectedPlace = places.find( p => p.id === idSelected );
 
         //Weather data
+        const weather = await searches.weatherCity(objSelectedPlace.lat, objSelectedPlace.lng);
 
         //Show results
-        console.log('\nInfo city\n');
-        console.log('City:');
-        console.log('Lat:');
-        console.log('Lng:');
-        console.log('Temp:');
-        console.log('Min:');
-        console.log('Max:');
-
+        console.clear();
+        console.log('======================'.blue);
+        console.log('   🌧  Info City  🌧 '.bold);
+        console.log('======================'.blue);
+        console.log('City:', objSelectedPlace.name.green);
+        console.log('Lat:', objSelectedPlace.lat);
+        console.log('Lng:', objSelectedPlace.lng);
+        console.log('Temp:', weather.temp);
+        console.log('Min:', weather.min);
+        console.log('Max:', weather.max);
+        console.log('Desc:', weather.desc.green);
 
       break;
     }
