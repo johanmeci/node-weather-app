@@ -2,13 +2,13 @@
 
 Weather App built with Node.js and uses console as UI. It has the functionality to search for a city and generate information related to the climate of the selected place. Generates a json file as a database.
 
-<img src="./img/node_weather.png" style="border-radius:5px;margin-bottom:15px;margin-top:20px">
+![weather app](/img/node_weather.png 'img weather app')
 
-<img src="./img/node_weather2.png" style="border-radius:5px;margin-bottom:15px">
+![weather app](/img/node_weather2.png 'img weather app 2')
 
-<img src="./img/node_weather3.png" style="border-radius:5px;margin-bottom:15px">
+![weather app](/img/node_weather3.png 'img weather app 3')
 
-<br>
+</br>
 
 ## **Built With**
 
