@@ -26,7 +26,7 @@ class Searches {
     return {
       'access_token': process.env.MAPBOX_KEY,
       'limit': 5,
-      'language': 'es'
+      'types': 'place'
     };
   }
 
@@ -34,7 +34,7 @@ class Searches {
     return {
       'appid': process.env.OPENWEATHER_KEY,
       'units': 'metric',
-      'lang': 'es'
+      'lang': 'en'
     }
   }
 
